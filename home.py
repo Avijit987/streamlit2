@@ -1,40 +1,29 @@
 import streamlit as st
-import pandas as pd
-from sklearn.ensemble import RandomForestRegressor  # Replace with your model type
-import pickle
-# Load the trained model from the pickle file
-model = pickle.load(open('house_price_prediction_model.pkl', 'rb'))
 
-def main():
-    """
-    Streamlit app for house price prediction
-    """
 
-    # Title and description
-    st.title('House Price Prediction App')
-    st.write('Enter details about your house to predict its price.')
+st.title("House Price Prediction App")
 
-    # Input fields for house features
-     sqft = st.number_input('Square Footage', min_value=0)
-     bedrooms = st.number_input('Number of Bedrooms', min_value=0)
-     bathrooms = st.number_input('Number of Bathrooms', min_value=0)  # Add more fields as needed
+# Import your machine learning model from model.py
+from model import load_model, make_prediction
 
-    # Create a DataFrame from user input (replace with your feature names)
-    data = pd.DataFrame({
-        'sqft': [sqft],
-        'bedrooms': [bedrooms],
-        'bathrooms': [bathrooms]
-    })
+# Title and description for your app
+st.write("Enter the area to get a prediction price.")
 
-    # Prediction button
-    if st.button('Predict Price'):
-        # Preprocess the data if necessary (e.g., handle categorical features)
-        # You might need to scale or encode features depending on your model
+# User input elements based on your model's features
+# Example: numeric input for a house price prediction model
+sqft = st.number_input("Area:", min_value=0)
 
-        prediction = model.predict(data)[0]
+# Button to trigger prediction
+if st.button("Predict"):
+    # Load your model (if not already loaded)
+    model = load_model()
 
-        # Display the prediction
-        st.write(f'Predicted Price: ${prediction:,.2f}')
+    # Prepare user input data (might involve conversion or reshaping)
+    input_data = [[ sqft]]
 
-if __name__ == '__main__':
-    main()
+    # Make prediction using the model
+    prediction = make_prediction(model, input_data)
+
+    # Display the prediction result
+    st.write("Predicted value:", prediction)
+

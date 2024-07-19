@@ -1,0 +1,31 @@
+body {
+    background-color: #fccaca;  /* Light background for readability */
+    font-family: sans-serif;  /* Consistent font style */
+}
+
+.title {
+    text-align: center;  /* Center title */ 
+}
+
+.description {
+    padding-bottom: 15px;  /* Add some space below the description */
+}
+
+
+
+.stButton {  /* Target Streamlit buttons for styling */
+    background-color: #8c6eed;  /* Green button background */
+    color: white;  /* White button text */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer; /* Indicate clickable button */
+}
+
+.stButton:hover {
+    background-color: #bec347;  /* Darker green on hover */
+}
+
+.stTitle{
+    background-color: #fccaca;
+}
